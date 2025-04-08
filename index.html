@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>F24Site</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #1D1D27;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 40px;
+      background-color: #1D1D27;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      position: fixed;
+      width: 95%;
+      z-index: 4;
+    }
+
+    .logo {
+      font-size: 18px;
+      font-weight: bold;
+      color: #BFBFBF;
+    }
+
+    nav a {
+      margin-left: 36px;
+	  margin-right: 5px;
+      text-decoration: none;
+      color: #BFBFBF;
+      font-size: 16px;
+    }
+
+    nav a:hover {
+      color: #BF2541;
+    }
+
+
+
+    .hero {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      background-color: #1D1D27;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 30% 40%, rgba(191, 37, 65, 0.4) 0%, transparent 50%),
+                  radial-gradient(circle at 70% 60%, rgba(191, 37, 65, 0.3) 0%, transparent 50%),
+                  radial-gradient(circle at 60% 30%, rgba(191, 191, 191, 0.3) 0%, transparent 60%);
+      filter: blur(80px);
+      z-index: 0;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      font-weight: 700;
+      color: #BFBFBF;
+      z-index: 2;
+    }
+
+    .noise {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://www.transparenttextures.com/patterns/noise.png');
+      opacity: 0.04;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+
+
+    .preview-section {
+      padding: 80px 40px;
+      background-color: #1D1D27;
+      color: #BFBFBF;
+      text-align: center;
+    }
+
+    .section-title {
+      font-family: EB Garamont, serif;
+      font-style: italic;
+      font-size: 30px;
+      margin-bottom: 60px;
+      color: #BFBFBF;
+    }
+
+    .preview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+      justify-content: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .preview-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .preview-box {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      border-top-left-radius: 60px;
+      border-bottom-right-radius: 60px;
+      background-color: #BF2541;
+      border: 4px solid #BF2541;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s ease;
+    }
+
+    .preview-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .preview-box:hover {
+      transform: scale(1.03);
+    }
+
+    .preview-title {
+      font-family: 'Times New Roman', serif;
+      font-style: italic;
+      font-size: 14px;
+      margin-top: 12px;
+      color: #BFBFBF;
+    }
+
+
+
+    .about-section {
+      padding: 80px 0;
+      background-color: #1D1D27;
+    }
+
+    .about-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: stretch;
+      justify-content: space-between;
+      gap: 32px;
+      padding: 0 40px;
+	  margin: 0 230px;
+    }
+
+    .about-photo {
+      width: 200px;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      border-top-left-radius: 60px;
+      border-bottom-right-radius: 60px;
+      border: 4px solid #BF2541;
+      background-color: #BF2541;
+      flex-shrink: 0;
+    }
+
+    .about-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .about-text {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #1D1D27;
+      padding: 24px;
+      color: #BFBFBF;
+      border-top-left-radius: 30px;
+      border-bottom-right-radius: 30px;
+      border: 4px solid #BF2541;
+      font-size: 15px;
+      line-height: 1.6;
+	  text-align: justify;
+    }
+
+    .about-text p {
+      margin: 0;
+    }
+
+    .about-section h2 {
+      width: 100%;
+      text-align: center;
+      font-family: EB Garamont, serif;
+      font-style: italic;
+      font-size: 30px;
+      color: #BFBFBF;
+      margin-bottom: 40px;
+    }
+
+
+
+    .kontak-section {
+      margin: 50px auto;
+    }
+
+    .kontak {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .kontak img {
+      width: 30px;
+    }
+
+    .kontak-text {
+      font-family: EB Garamont, serif;
+      font-weight: bold;
+      font-style: italic;
+      font-size: 30px;
+      margin-bottom: 30px;
+      color: #BFBFBF;
+      text-align: center;
+    }
+
+    .footer {
+      background: linear-gradient(to right, #BF2541, #1D1D27);
+      color: #BFBFBF;
+      font-size: 12px;
+      text-align: center;
+      padding: 5px;
+      font-family: 'Plus Jakarta Sans';
+      font-weight: bold;
+    }
+
+    .footer a {
+      color: #BFBFBF;
+      text-decoration: none;
+      margin: 0 0px;
+      transition: all 0.3s ease;
+    }
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">F24Site</div>
+    <nav>
+      <a href="#portofolio">Art of 24</a>
+      <a href="#tentangsaya">The 24</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="noise"></div>
+    <h1>Hi, Welcome to 24 Room</h1>
+  </section>
+
+  <section class="preview-section" id="portofolio">
+    <h2 class="section-title">Art of 24</h2>
+    <div class="preview-grid">
+
+	      <div class="preview-item">
+        <div class="preview-box">
+          <img src="img/Gozeal Finale.png" alt="Desain 1">
+        </div>
+        <p class="preview-title">If I'm a Gozeal</p>
+      </div>
+
+      <div class="preview-item">
+        <div class="preview-box">
+          <img src="img/Yearbook.jpg" alt="Desain 2">
+        </div>
+        <p class="preview-title">Multhreefy</p>
+      </div>
+
+      <div class="preview-item">
+        <div class="preview-box">
+          <img src="img/Tugas Poster AKG.jpg" alt="Desain 3">
+        </div>
+        <p class="preview-title">Let It Go</p>
+      </div>
+
+      <div class="preview-item">
+        <div class="preview-box">
+          <img src="img/Jersey MM.jpg" alt="Desain 4">
+        </div>
+        <p class="preview-title">Solidarity Jersey</p>
+      </div>
+	  
+      <div class="preview-item">
+        <div class="preview-box">
+          <img src="img/Logo Futsal Pedia.jpg" alt="Desain 5">
+        </div>
+        <p class="preview-title">Solidarity Badge</p>
+      </div>
+
+      <div class="preview-item">
+        <div class="preview-box">
+          <img src="img/Hari Guru.jpg" alt="Desain 6">
+        </div>
+        <p class="preview-title">Teacher Day</p>
+      </div>
+	  
+      <div class="preview-item">
+        <div class="preview-box">
+          <img src="img/Tan Malaka.jpg" alt="Desain 7">
+        </div>
+        <p class="preview-title">Heroes: Tan Malaka</p>
+      </div>
+	  
+      <div class="preview-item">
+        <div class="preview-box">
+          <img src="img/1312.jpg" alt="Desain 8">
+        </div>
+        <p class="preview-title">Forever 1312!</p>
+      </div>
+	  
+      <div class="preview-item">
+        <div class="preview-box">
+          <img src="img/Underrated Noise.jpg" alt="Desain 9">
+        </div>
+        <p class="preview-title">Underrated People</p>
+      </div>
+	  
+      <div class="preview-item">
+        <div class="preview-box">
+          <img src="img/The Adams Lirik.jpg" alt="Desain 10">
+        </div>
+        <p class="preview-title">Timur</p>
+      </div>
+	  
+      <div class="preview-item">
+        <div class="preview-box">
+          <img src="img/ACAB!.jpg" alt="Desain 11">
+        </div>
+        <p class="preview-title">ACAB!</p>
+      </div>
+	  
+      <div class="preview-item">
+        <div class="preview-box">
+          <img src="img/33x.jpg" alt="Desain 12">
+        </div>
+        <p class="preview-title">33x</p>
+      </div>
+	  
+    </div>
+  </section>
+
+	<section class="about-section" id="tentangsaya">
+    <h2 class="section-title">The 24</h2>
+    <div class="about-wrapper">
+      <div class="about-photo">
+        <img src="img/foto gua.jpg" alt="Foto Tentang Saya">
+      </div>
+      <div class="about-text">
+        <p>
+          Halo! Saya Fauzi Satria Dityan, seorang mahasiswa yang gemar mengeksplorasi dunia desain grafis dan media digital. Portofolio ini adalah representasi dari karya, ide, dan eksperimen saya selama perjalanan di dunia kreatif. Saya percaya bahwa setiap desain punya cerita, dan saya ingin membagikannya melalui karya-karya ini.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="kontak-section">
+    <div class="kontak-text">
+      <p>Contact On</p>
+    </div>
+    <div class="kontak">
+      <a href="https://www.instagram.com/dityanstr/"><img src="C:/Users/user/Downloads/instagram (1).png" alt=""></a>
+      <a href=""><img src="C:/Users/user/Downloads/envelope (1).png" alt=""></a>
+      <a href=""><img src="C:/Users/user/Downloads/linkedin.png" alt=""></a>
+    </div>
+  </section>
+
+  <footer class="footer"> 
+    <p>&copy; 2025 | F24Site</p>
+  </footer>
+
+</body>
+</html>
